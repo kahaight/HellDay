@@ -330,6 +330,13 @@ namespace HellDay.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var member = new User() { Email = model.Email, Name = model.Name };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Members.Add(member);
+                ctx.SaveChanges();
+            }
+
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

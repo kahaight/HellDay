@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace HellDay.Models
 {
-    class CommentListItem
+    public class CommentListItem
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public User Author { get; set; }
-        public Post CommentPost { get; set; }
+        public string Author { get; set; }
     }
 }

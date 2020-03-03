@@ -9,7 +9,7 @@ namespace HellDay.Models
     public class LikeCreate
     {
         public int PostId { get; set; }
-        public Guid UserId { get set; }
+        public Guid UserId { get; set; }
 
     }
 }

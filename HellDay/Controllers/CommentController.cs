@@ -29,5 +29,13 @@ namespace HellDay.Controllers
             return Ok();
         }
 
+        public IHttpActionResult Get(int postId)
+        {
+            CommentService commentService = CreateCommentService();
+            var comments = commentService.GetCommentsByPostId(postId);
+            return Ok(comments);
+        }
+
+
     }
 }
