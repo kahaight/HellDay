@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace HellDay.Data
 {
-    public class Post
+    public class Like
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
-        [ForeignKey(nameof(Author))]
+        [ForeignKey(nameof(LikedPost))]
+        public int PostId { get; set; }
+        [ForeignKey(nameof(Liker))]
         public Guid UserId { get; set; }
-        public virtual User Author { get; set; }
+        public virtual Post LikedPost { get; set; }
+        public virtual User Liker { get; set; }
     }
 }

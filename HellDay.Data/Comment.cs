@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace HellDay.Data
 {
-    public class Post
+    public class Comment
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; }
         public string Text { get; set; }
         [ForeignKey(nameof(Author))]
         public Guid UserId { get; set; }
+        [ForeignKey(nameof(CommentPost))]
+        public int PostId { get; set; }
         public virtual User Author { get; set; }
+        public virtual Post CommentPost { get; set; }
+
     }
 }

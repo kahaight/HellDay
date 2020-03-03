@@ -1,4 +1,5 @@
 ﻿using HellDay.Data;
+using HellDay.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +8,37 @@ using System.Threading.Tasks;
 
 namespace HellDay.Services
 {
-    class ReplyService
+    public class ReplyService
     {
-       
-             private readonly int _commentId;
-        public ReplyService(int commentId)
+        private readonly Guid _userId;
+        public ReplyService(Guid userId)
         {
-            _commentId =commentId;
+            _userId = userId;
+        }
+        public bool CreateReply(ReplyCreate model)
+        {
+            var entity = new Reply()
+            {
+                Text = model.Text,
+                UserId = _userId,
+                PostId = model.PostId,
+                CommentId = model.CommentId
+            };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Replies.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
-        public ReplyDetail GetReplyByCommentId(int id)
+        public ReplyDetail GetReplyByReplyId(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Comments
-                        .Single(e => e.ReplyId == id && e.CommentId == _commentId);
+                        .Replies
+                        .Single(e => e.ReplyId == id);
                 return
                     new ReplyDetail
                     {

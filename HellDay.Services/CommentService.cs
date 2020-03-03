@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HellDay.Data;
+using HellDay.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +10,25 @@ namespace HellDay.Services
 {
     public class CommentService
     {
-        /*private readonly Guid _userId;
-
-        public PostService(Guid userId)
+        private readonly Guid _userId;
+        public CommentService(Guid userId)
         {
             _userId = userId;
-        }*/
-        private readonly int _postId;
-        public CommentService(int postId)
+        }
+        public bool CreateComment(CommentCreate model)
         {
-            _postId = postId;
-          }
+            var entity = new Comment()
+            {
+                Text = model.Text,
+                UserId = _userId,
+                PostId = model.PostId
+            };
+            using(var ctx = new ApplicationDbContext())
+            {
+                ctx.Comments.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
         public CommentDetail GetCommentByPostId(int id)
         {
@@ -27,7 +37,7 @@ namespace HellDay.Services
                 var entity =
                     ctx
                         .Posts
-                        .Single(e => e.CommentId == id && e.PostId == _postId);
+                        .Single(e.PostId == id);
                 return
                     new CommentDetail
                     {
@@ -38,7 +48,5 @@ namespace HellDay.Services
                     };
             }
         }
-
-
     }
 }
