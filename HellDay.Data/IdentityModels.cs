@@ -36,7 +36,7 @@ namespace HellDay.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Reply> Replies { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> Members { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
