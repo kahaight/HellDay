@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HellDay.Models
 {
-    public class LikeCreate
+    public class PostCreate
     {
-        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
         public Guid UserId { get; set; }
-
     }
 }
