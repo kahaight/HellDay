@@ -15,6 +15,7 @@ namespace HellDay.Data
         [ForeignKey(nameof(LikedPost))]
         public int PostId { get; set; }
         [ForeignKey(nameof(Liker))]
+        public Guid UserId { get; set; }
         public virtual Post LikedPost { get; set; }
         public virtual User Liker { get; set; }
     }
