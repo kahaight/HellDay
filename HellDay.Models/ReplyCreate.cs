@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace HellDay.Models
 {
-    public class ReplyCreate : Reply
+    public class ReplyCreate : CommentCreate
     {
-
+        public int CommentId { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace HellDay.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public User Author { get; set; }
-        public Post CommentPost { get; set; }
+        public string Author { get; set; }
+        public string CommentPost { get; set; }
     }
 }
