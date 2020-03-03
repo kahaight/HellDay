@@ -10,7 +10,6 @@ namespace HellDay.Services
 {
     public class CommentService
     {
-
         private readonly Guid _userId;
         public CommentService(Guid userId)
         {
@@ -28,6 +27,25 @@ namespace HellDay.Services
             {
                 ctx.Comments.Add(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public CommentDetail GetCommentByPostId(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Posts
+                        .Single(e.PostId == id);
+                return
+                    new CommentDetail
+                    {
+                        CommentId = entity.CommentId,
+                        Text = entity.Text,
+                        Author = entity.Author,
+                        CommentPost = entity.CommentPost
+                    };
             }
         }
     }

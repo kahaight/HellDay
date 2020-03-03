@@ -30,5 +30,24 @@ namespace HellDay.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public ReplyDetail GetReplyByReplyId(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Replies
+                        .Single(e => e.ReplyId == id);
+                return
+                    new ReplyDetail
+                    {
+                        ReplyId = entity.ReplyId,
+                        Text = entity.Text,
+                        Author = entity.Author,
+                        ReplyComment = entity.ReplyComment
+                    };
+            }
+        }
     }
 }
