@@ -14,5 +14,6 @@ namespace HellDay.Data
         public int CommentId { get; set; }
         public virtual Comment ReplyComment { get; set; }
 
+
     }
 }

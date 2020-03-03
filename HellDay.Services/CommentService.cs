@@ -20,7 +20,7 @@ namespace HellDay.Services
             var entity = new Comment()
             {
                 Text = model.Text,
-                UserId = _userId,
+                UserId = model.UserId,
                 PostId = model.PostId
             };
             using(var ctx = new ApplicationDbContext())
@@ -30,22 +30,24 @@ namespace HellDay.Services
             }
         }
 
-        public CommentDetail GetCommentByPostId(int id)
+        public IEnumerable<CommentDetail> GetCommentsByPostId(int PostId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var query =
                     ctx
-                        .Posts
-                        .Single(e.PostId == id);
-                return
+                        .Comments
+                        .Where(e => e.PostId == PostId)
+                        .Select(
+                e =>
                     new CommentDetail
                     {
-                        CommentId = entity.CommentId,
-                        Text = entity.Text,
-                        Author = entity.Author,
-                        CommentPost = entity.CommentPost
-                    };
+                        Text = e.Text,
+                        Author = e.Author.Name,
+                        CommentPost = e.CommentPost.Text
+                    }
+                    );
+                return query.ToArray();
             }
         }
     }

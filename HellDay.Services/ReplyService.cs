@@ -20,7 +20,7 @@ namespace HellDay.Services
             var entity = new Reply()
             {
                 Text = model.Text,
-                UserId = _userId,
+                UserId = model.UserId,
                 PostId = model.PostId,
                 CommentId = model.CommentId
             };
@@ -38,14 +38,13 @@ namespace HellDay.Services
                 var entity =
                     ctx
                         .Replies
-                        .Single(e => e.ReplyId == id);
+                        .Single(e => e.Id == id);
                 return
                     new ReplyDetail
                     {
-                        ReplyId = entity.ReplyId,
                         Text = entity.Text,
-                        Author = entity.Author,
-                        ReplyComment = entity.ReplyComment
+                        UserId = entity.UserId,
+                        PostId = entity.PostId
                     };
             }
         }

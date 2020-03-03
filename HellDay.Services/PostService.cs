@@ -1,4 +1,5 @@
 ﻿using HellDay.Data;
+using HellDay.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,42 +12,33 @@ namespace HellDay.Services
        public class PostService
     {
         private readonly Guid _userId;
-
         public PostService(Guid userId)
         {
             _userId = userId;
         }
-       
-        public IEnumerable GetPost()
+        public IEnumerable<PostDetail> GetPosts()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    ctx
-                        .Post
-                        .Where(e => e.UserId == _userId)
-                        .Single(
+                var query = ctx.Posts.Select(
                             e =>
-                                new Post
+                                new PostDetail
                                 {
                                     Title = e.Title,
                                     Text = e.Text,
-                                    Author = e.Author
                                 }
                         );
-
                 return query.ToArray();
             }
         }
-        public bool PostAPost(PostCreate model)
+        public bool CreatePost(PostCreate model)
         {
             var entity =
                 new Post()
                 {
-                    Id = _userId,
+                    UserId = model.UserId,
                     Title = model.Title,
-                    Text = model.Text,
-                    Author = model.Author
+                    Text = model.Text
                 };
             using (var ctx=new ApplicationDbContext())
             {

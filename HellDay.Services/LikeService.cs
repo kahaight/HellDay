@@ -19,7 +19,7 @@ namespace HellDay.Services
         {
             var entity = new Like()
             {
-                UserId = _userId,
+                UserId = model.UserId,
                 PostId = model.PostId,
             };
             using (var ctx = new ApplicationDbContext())

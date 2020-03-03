@@ -87,6 +87,19 @@
     <Compile Include="Comment.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Like.cs" />
+    <Compile Include="Migrations\202003031638569_firstmigration.cs" />
+    <Compile Include="Migrations\202003031638569_firstmigration.Designer.cs">
+      <DependentUpon>202003031638569_firstmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003031749400_addednametoRegisterBindingModel.cs" />
+    <Compile Include="Migrations\202003031749400_addednametoRegisterBindingModel.Designer.cs">
+      <DependentUpon>202003031749400_addednametoRegisterBindingModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003031826251_whereisthereplytable.cs" />
+    <Compile Include="Migrations\202003031826251_whereisthereplytable.Designer.cs">
+      <DependentUpon>202003031826251_whereisthereplytable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reply.cs" />
@@ -95,6 +108,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003031638569_firstmigration.resx">
+      <DependentUpon>202003031638569_firstmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003031749400_addednametoRegisterBindingModel.resx">
+      <DependentUpon>202003031749400_addednametoRegisterBindingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003031826251_whereisthereplytable.resx">
+      <DependentUpon>202003031826251_whereisthereplytable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
