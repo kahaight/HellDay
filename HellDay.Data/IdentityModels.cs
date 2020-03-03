@@ -57,11 +57,13 @@ namespace HellDay.Data
             HasKey(iul => iul.UserId);
         }
     }
-    public class IdentityUserRoleConfiguration: EntityTypeConfiguration<IdentityUserRole>
+
+    public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
     {
         public IdentityUserRoleConfiguration()
         {
             HasKey(iur => iur.UserId);
         }
     }
+
 }

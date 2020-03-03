@@ -1,5 +1,6 @@
 ﻿using HellDay.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HellDay.Services
 {
-    public class PostService
+       public class PostService
     {
         private readonly Guid _userId;
 
@@ -15,11 +16,28 @@ namespace HellDay.Services
         {
             _userId = userId;
         }
-       /* public CommentService(Post postId)
+       
+        public IEnumerable GetPost()
         {
-            _
-        }*/
-        
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Post
+                        .Where(e => e.UserId == _userId)
+                        .Single(
+                            e =>
+                                new Post
+                                {
+                                    Title = e.Title,
+                                    Text = e.Text,
+                                    Author = e.Author
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
         public bool PostAPost(PostCreate model)
         {
             var entity =
@@ -36,18 +54,5 @@ namespace HellDay.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        //Use another service class for Comments?
-        
-        /*public PostComment GetCommentByPostId(int id)
-        {
-            using (var ctx=new ApplicationDbContext())
-            {
-                var entity=
-                    ctx
-                        .Posts
-                        .Single(e=>e.CommentId==id&& e.PostId==)
-            }
-        }*/
-
     }
 }
